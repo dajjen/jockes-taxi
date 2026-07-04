@@ -8,9 +8,8 @@ SSH_HOST="premium23.oderland.com"
 SSH_PORT="22"
 SSH_KEY="$HOME/.ssh/id_rsa_oderland"
 
-# Webbrot på servern — bekräfta med:
-#   ssh -i $SSH_KEY $SSH_USER@$SSH_HOST 'ls -d ~/domains/*/public_html'
-REMOTE_PATH="domains/jockestaxi.se/public_html"
+# Webbrot på servern (cPanel-konto, primärdomän serveras från ~/public_html).
+REMOTE_PATH="public_html"
 
 cd "$(dirname "$0")"
 
