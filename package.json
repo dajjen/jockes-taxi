@@ -5,9 +5,10 @@
   "type": "module",
   "description": "Statisk one-page-sajt för Jockes Taxi Gotland.",
   "scripts": {
-    "test": "npm run test:html && npm run test:seo && npm run test:links",
+    "test": "npm run test:html && npm run test:seo && npm run test:php && npm run test:links",
     "test:html": "html-validate index.html 404.html",
     "test:seo": "node --test",
+    "test:php": "php test/review.test.php",
     "test:links": "linkinator . --config .linkinator.config.json",
     "serve": "npx --yes http-server -p 8799 -c-1 ."
   },

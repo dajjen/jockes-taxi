@@ -98,19 +98,22 @@ Följ körningen under fliken **Actions** i GitHub-repot.
 
 ## Tester
 
-`npm test` kör tre kontroller:
+`npm test` kör fyra kontroller:
 
 | Kommando          | Vad den kollar                                            |
 |-------------------|-----------------------------------------------------------|
-| `npm run test:html` | Att HTML:en är giltig (`html-validate`)                 |
-| `npm run test:seo`  | Titel, meta description, canonical, `lang`, Open Graph, JSON-LD och att alla `#`-ankare pekar rätt |
+| `npm run test:html` | Att HTML:en (index + 404) är giltig (`html-validate`)   |
+| `npm run test:seo`  | Titel, meta description, canonical, `lang`, Open Graph, JSON-LD, att alla `#`-ankare pekar rätt, samt recensionsformulärets fält och honungsfälla |
+| `npm run test:php`  | Serverlogiken i `review-lib.php`: honeypot, validering, ogiltig e-post, korrekt mejl och skydd mot header-injektion |
 | `npm run test:links`| Inga brutna länkar/resurser (`linkinator`)              |
 
+Kräver `node` och `php` (båda finns förinstallerade på GitHub-runnern `ubuntu-latest`).
 Externa länkar (Facebook) och den ännu ej live-satta domänen hoppas över
 i `.linkinator.config.json` tills de är riktiga.
 
-> OBS: `send-review.php` körs bara på en riktig PHP-server (Oderland), inte på den
-> lokala python-servern eller i testerna. Testa recensionsformuläret först efter deploy.
+> OBS: `test:php` testar *logiken* (via `review-lib.php`), men själva mejlutskicket
+> (`mail()`) fungerar bara på en riktig PHP-server. Gör ett skarpt test av formuläret
+> efter deploy till Oderland.
 
 ---
 
