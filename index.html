@@ -117,7 +117,11 @@
       <span class="brand-name">Jockes&nbsp;Taxi</span>
     </a>
 
-    <nav class="nav" aria-label="Huvudmeny">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="huvudmeny" aria-label="Öppna meny">
+      <span class="nav-toggle-box" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+
+    <nav class="nav" id="huvudmeny" aria-label="Huvudmeny">
       <a href="#omraden">Vart vi kör</a>
       <a href="#omdomen">Omdömen</a>
       <a href="#kontakt">Kontakt</a>
@@ -189,7 +193,7 @@
       <article class="usp-card">
         <span class="usp-num">04</span>
         <h2>Alltid framme</h2>
-        <p>Ring så är vi på väg. Boka i förväg för färja, flyg och sjukresor — eller bara när det passar.</p>
+        <p>Ring så är vi på väg. Boka i förväg för färja, flyg — eller bara när det passar.</p>
       </article>
     </div>
   </section>
@@ -200,27 +204,38 @@
       <p class="eyebrow eyebrow-dark">Vart vi kör</p>
       <h2 id="omraden-rubrik" class="section-title">Taxi i hela Gotland</h2>
       <p class="section-lead">
-        Vi hämtar och lämnar i alla orter på ön. Här är några av platserna vi kör till och från
-        varje dag — hittar du inte din by, ring ändå. Vi kör överallt på Gotland.
+        Vi hämtar och lämnar i alla orter på ön — Visby, Hemse, Slite, Fårösund, Fårö,
+        Klintehamn och överallt däremellan. Hittar du inte din by på kartan? Ring ändå,
+        vi kör i hela Gotland.
       </p>
-      <ul class="area-grid" role="list">
-        <li>Visby</li>
-        <li>Hemse</li>
-        <li>Slite</li>
-        <li>Fårösund</li>
-        <li>Fårö</li>
-        <li>Klintehamn</li>
-        <li>Roma</li>
-        <li>Burgsvik</li>
-        <li>Ljugarn</li>
-        <li>Katthammarsvik</li>
-        <li>Tofta</li>
-        <li>Lärbro</li>
-        <li>Havdhem</li>
-        <li>Väskinde</li>
-        <li>Vamlingbo</li>
-        <li>Kräklingbo</li>
-      </ul>
+
+      <figure class="map-figure">
+    <svg class="gotland-map" viewBox="9393.8 -58059.8 1356.9 1214.3" role="img" aria-labelledby="karta-titel karta-desc">
+      <title id="karta-titel">Karta över Gotland</title>
+      <desc id="karta-desc">Gotland med orterna Visby, Fårösund, Fårö, Lärbro, Slite, Roma, Katthammarsvik, Klintehamn, Ljugarn, Hemse, Havdhem och Burgsvik utmarkerade.</desc>
+      <path class="m-land" d="M 9733.8,-57259.8 L 9764.6,-57238.2 L 9765.3,-57189.6 L 9774.6,-57185.3 L 9763.4,-57167.0 L 9773.7,-57144.7 L 9788.4,-57147.1 L 9796.9,-57133.0 L 9802.3,-57140.9 L 9793.5,-57121.0 L 9804.3,-57114.1 L 9802.1,-57099.2 L 9791.3,-57072.2 L 9778.5,-57069.5 L 9809.6,-57061.7 L 9825.4,-57085.9 L 9846.6,-57095.3 L 9836.7,-57041.8 L 9794.0,-57022.8 L 9792.5,-56982.6 L 9750.9,-56919.0 L 9753.5,-56907.9 L 9780.9,-56913.8 L 9788.5,-56905.6 L 9821.2,-56928.1 L 9842.7,-56929.8 L 9861.2,-56952.1 L 9857.1,-56964.5 L 9882.2,-56985.2 L 9876.1,-56994.9 L 9898.8,-56994.2 L 9866.1,-57024.7 L 9872.4,-57081.0 L 9929.2,-57118.5 L 9895.5,-57121.8 L 9900.3,-57140.4 L 9989.6,-57194.8 L 9996.5,-57203.9 L 9978.6,-57207.5 L 9993.4,-57219.3 L 10030.7,-57218.1 L 10044.7,-57231.7 L 10050.0,-57217.5 L 10059.6,-57222.8 L 10064.3,-57234.4 L 10043.6,-57242.5 L 10068.0,-57244.7 L 10071.0,-57265.6 L 10043.3,-57283.2 L 10048.0,-57312.5 L 10069.6,-57322.2 L 10091.0,-57363.2 L 10118.3,-57369.7 L 10151.0,-57399.2 L 10160.8,-57382.3 L 10178.7,-57403.8 L 10185.4,-57421.8 L 10176.3,-57421.4 L 10165.2,-57444.1 L 10145.5,-57434.4 L 10129.9,-57446.8 L 10121.5,-57438.9 L 10107.4,-57449.5 L 10116.3,-57469.7 L 10094.0,-57469.1 L 10107.1,-57488.7 L 10088.3,-57510.5 L 10123.4,-57560.5 L 10112.6,-57577.9 L 10119.2,-57603.0 L 10095.8,-57616.3 L 10118.7,-57679.4 L 10114.8,-57695.0 L 10103.8,-57687.0 L 10098.9,-57694.7 L 10103.5,-57704.2 L 10112.7,-57695.1 L 10120.3,-57701.5 L 10122.1,-57748.0 L 10143.7,-57716.5 L 10156.7,-57736.2 L 10169.0,-57713.9 L 10179.7,-57731.1 L 10200.6,-57727.7 L 10194.8,-57787.3 L 10212.8,-57768.0 L 10215.9,-57798.6 L 10229.8,-57805.6 L 10242.4,-57836.0 L 10253.9,-57826.1 L 10260.1,-57835.5 L 10275.4,-57816.9 L 10254.8,-57866.4 L 10238.0,-57869.9 L 10228.8,-57921.2 L 10207.7,-57913.3 L 10182.6,-57926.8 L 10142.3,-57923.1 L 10132.9,-57899.9 L 10140.0,-57879.6 L 10122.3,-57867.4 L 10111.0,-57827.7 L 10096.0,-57907.1 L 10074.8,-57928.8 L 10021.8,-57887.8 L 10011.4,-57844.4 L 9986.8,-57845.2 L 9932.0,-57818.5 L 9862.1,-57668.8 L 9823.6,-57616.8 L 9776.2,-57584.6 L 9741.7,-57534.4 L 9753.3,-57488.0 L 9747.9,-57440.7 L 9761.0,-57438.0 L 9771.2,-57409.8 L 9763.1,-57405.8 L 9790.6,-57390.2 L 9775.9,-57369.9 L 9782.9,-57347.2 L 9775.4,-57320.3 L 9739.5,-57289.5 L 9733.8,-57259.8 Z" />
+      <path class="m-land" d="M 10241.7,-57907.3 L 10264.4,-57891.6 L 10265.2,-57868.3 L 10289.1,-57840.8 L 10313.9,-57885.8 L 10296.3,-57913.0 L 10302.0,-57925.2 L 10314.9,-57934.4 L 10326.4,-57928.1 L 10355.7,-57951.4 L 10385.8,-57943.3 L 10410.7,-57959.2 L 10405.0,-57980.0 L 10386.6,-57986.6 L 10354.2,-57973.6 L 10341.1,-57987.5 L 10351.3,-57999.6 L 10330.9,-57980.9 L 10319.0,-57981.1 L 10324.4,-57999.8 L 10299.3,-57979.0 L 10283.7,-57982.8 L 10262.9,-57957.7 L 10276.1,-57949.4 L 10270.3,-57933.7 L 10248.4,-57926.0 L 10241.7,-57907.3 Z" />
+      <g class="m-town"><circle class="m-dot" cx="10213.0" cy="-57866.0" r="10" /><text class="m-label" x="10187.0" y="-57860.0" text-anchor="end">Fårösund</text></g>
+      <g class="m-town"><circle class="m-dot" cx="10308.8" cy="-57910.0" r="10" /><text class="m-label m-label--island" x="10334.8" y="-57904.0" text-anchor="start">Fårö</text></g>
+      <g class="m-town"><circle class="m-dot" cx="10106.5" cy="-57783.0" r="10" /><text class="m-label" x="10132.5" y="-57777.0" text-anchor="start">Lärbro</text></g>
+      <g class="m-town"><circle class="m-dot" cx="10115.1" cy="-57709.0" r="10" /><text class="m-label" x="10141.1" y="-57703.0" text-anchor="start">Slite</text></g>
+      <g class="m-town"><circle class="m-dot m-dot--big" cx="9843.4" cy="-57635.0" r="15" /><text class="m-label" x="9817.4" y="-57629.0" text-anchor="end">Visby</text></g>
+      <g class="m-town"><circle class="m-dot" cx="9935.9" cy="-57517.0" r="10" /><text class="m-label" x="9961.9" y="-57511.0" text-anchor="start">Roma</text></g>
+      <g class="m-town"><circle class="m-dot" cx="10167.8" cy="-57455.0" r="10" /><text class="m-label" x="10193.8" y="-57449.0" text-anchor="start">Katthammarsvik</text></g>
+      <g class="m-town"><circle class="m-dot" cx="9794.4" cy="-57390.0" r="10" /><text class="m-label" x="9768.4" y="-57384.0" text-anchor="end">Klintehamn</text></g>
+      <g class="m-town"><circle class="m-dot" cx="10066.1" cy="-57327.0" r="10" /><text class="m-label" x="10092.1" y="-57321.0" text-anchor="start">Ljugarn</text></g>
+      <g class="m-town"><circle class="m-dot" cx="9888.0" cy="-57238.0" r="10" /><text class="m-label" x="9862.0" y="-57232.0" text-anchor="end">Hemse</text></g>
+      <g class="m-town"><circle class="m-dot" cx="9863.8" cy="-57150.0" r="10" /><text class="m-label" x="9837.8" y="-57144.0" text-anchor="end">Havdhem</text></g>
+      <g class="m-town"><circle class="m-dot" cx="9827.2" cy="-57036.0" r="10" /><text class="m-label" x="9801.2" y="-57030.0" text-anchor="end">Burgsvik</text></g>
+      <g class="m-compass" transform="translate(9463.8, -57969.8)">
+        <text class="m-compass-n" x="0" y="0" text-anchor="middle">N</text>
+        <line x1="0" y1="12" x2="0" y2="70" />
+        <path d="M0,4 L7,20 L0,14 L-7,20 Z" />
+      </g>
+    </svg>
+        <figcaption class="map-caption">Vi kör över hela ön — dygnet runt, året om.</figcaption>
+      </figure>
+
       <p class="area-foot">…och alla vägar däremellan. <strong>Hela Gotland, dygnet runt.</strong></p>
     </div>
   </section>
@@ -358,7 +373,7 @@
       <a href="#top">Till toppen ↑</a>
     </nav>
     <p class="footer-legal">
-      © <span id="ar">2026</span> Jockes Taxi · Gotland
+      © <span id="ar">2026</span> Jockes Taxi · Gotland · Kartunderlag © OpenStreetMap-bidragsgivare
     </p>
   </div>
 </footer>

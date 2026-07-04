@@ -177,17 +177,64 @@ img, svg { max-width: 100%; display: block; }
   letter-spacing: -0.02em;
   color: var(--sea);
 }
-.nav { display: none; gap: 26px; }
+/* Mobil: menyn är en utfällbar panel under headern. */
+.nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  background: var(--ground);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 6px 20px 14px;
+}
+.nav.is-open { display: flex; }
 .nav a {
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.96rem;
+  font-size: 1.05rem;
   color: var(--text);
-  padding: 6px 0;
-  border-bottom: 2px solid transparent;
+  padding: 14px 2px;
+  border-bottom: 1px solid var(--line);
 }
-.nav a:hover { border-bottom-color: var(--sand); }
+.nav a:last-child { border-bottom: none; }
+.nav a:hover { color: var(--sea); }
 .header-call { display: none; }
+
+/* Hamburgar-knapp (endast mobil) */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 42px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--sea);
+  cursor: pointer;
+}
+.nav-toggle-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 22px;
+  height: 15px;
+}
+.nav-toggle-box span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-box span:nth-child(1) { transform: translateY(6.25px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-box span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-box span:nth-child(3) { transform: translateY(-6.25px) rotate(-45deg); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -297,39 +344,52 @@ img, svg { max-width: 100%; display: block; }
   margin-bottom: 28px;
 }
 
-/* ---------- Täckningsområde ---------- */
+/* ---------- Täckningsområde / karta ---------- */
 .areas { padding-block: 64px; }
-.area-grid {
-  list-style: none;
-  margin: 0 0 22px;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-.area-grid li {
-  background: var(--surface);
+.map-figure {
+  margin: 8px 0 22px;
+  background: linear-gradient(168deg, var(--sea-soft), var(--sea) 55%, var(--sea-deep));
   border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  font-weight: 600;
-  font-size: 0.98rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  border-radius: var(--radius);
+  padding: 20px 20px 12px;
+  box-shadow: var(--shadow);
 }
-.area-grid li::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--sand);
-  flex: none;
+.gotland-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 640px;
 }
-.area-grid li:hover {
-  transform: translateY(-2px);
-  border-color: var(--sand);
+.m-land {
+  fill: var(--ground);
+  stroke: var(--sand);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+.m-dot { fill: var(--sand); stroke: var(--sea-deep); stroke-width: 3; }
+.m-dot--big { fill: var(--sand-deep); stroke-width: 4; }
+.m-label {
+  fill: var(--sea-deep);
+  stroke: var(--ground);
+  stroke-width: 6;
+  paint-order: stroke;
+  stroke-linejoin: round;
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+}
+.m-label--island { font-style: italic; }
+.m-compass line,
+.m-compass path { stroke: rgba(241, 236, 225, 0.7); fill: rgba(241, 236, 225, 0.7); stroke-width: 3; }
+.m-compass-n { fill: var(--ground); font-family: var(--font-mono); font-size: 34px; font-weight: 700; }
+.map-caption {
+  margin-top: 10px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: rgba(241, 236, 225, 0.85);
 }
 .area-foot {
   font-size: 1.08rem;
@@ -526,20 +586,34 @@ img, svg { max-width: 100%; display: block; }
 @media (min-width: 560px) {
   .hero-cta { flex-direction: row; flex-wrap: wrap; }
   .hero-cta .btn { width: auto; }
-  .area-grid { grid-template-columns: repeat(3, 1fr); }
   .usp-grid { grid-template-columns: repeat(2, 1fr); }
   .review-form { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 860px) {
   body { font-size: 18px; }
-  .nav { display: flex; }
+  .nav-toggle { display: none; }
+  .nav {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    gap: 26px;
+    background: none;
+    border-bottom: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .nav a {
+    font-size: 0.96rem;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+  }
+  .nav a:hover { border-bottom-color: var(--sand); color: var(--text); }
   .header-call { display: inline-flex; }
   .hero { padding-block: 96px 180px; }
   .usp { padding-block: 12px 64px; }
   .usp-grid { grid-template-columns: repeat(4, 1fr); }
   .review-grid { grid-template-columns: repeat(3, 1fr); }
-  .area-grid { grid-template-columns: repeat(4, 1fr); }
   .footer-inner {
     flex-direction: row;
     align-items: center;

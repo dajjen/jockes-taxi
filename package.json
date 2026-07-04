@@ -6,7 +6,7 @@
   "description": "Statisk one-page-sajt för Jockes Taxi Gotland.",
   "scripts": {
     "test": "npm run test:html && npm run test:seo && npm run test:links",
-    "test:html": "html-validate index.html",
+    "test:html": "html-validate index.html 404.html",
     "test:seo": "node --test",
     "test:links": "linkinator . --config .linkinator.config.json",
     "serve": "npx --yes http-server -p 8799 -c-1 ."
