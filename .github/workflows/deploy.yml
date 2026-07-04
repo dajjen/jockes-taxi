@@ -1,0 +1,63 @@
+name: Test & Deploy
+
+# Kör tester på varje push och pull request.
+# Deployar till Oderland endast när main uppdateras och testerna är gröna.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Tester
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Installera beroenden
+        run: npm ci --no-audit --no-fund
+      - name: Kör tester (HTML, SEO, länkar)
+        run: npm test
+
+  deploy:
+    name: Deploy till Oderland
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Förbered SSH-nyckel
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy via rsync
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+        run: |
+          rsync -avz \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='test' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='.htmlvalidate.json' \
+            --exclude='.linkinator.config.json' \
+            --exclude='.gitignore' \
+            --exclude='*.md' \
+            -e "ssh -p $SSH_PORT -i ~/.ssh/id_deploy" \
+            ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH"

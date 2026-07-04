@@ -1,0 +1,52 @@
+# ============================================================================
+# Jockes Taxi — Apache-konfiguration för Oderland (DirectAdmin)
+# ============================================================================
+
+Options -Indexes
+DirectoryIndex index.html
+
+# ---- Kanonisk URL: tvinga HTTPS + www ----------------------------------------
+# Allt pekas mot https://www.jockestaxi.se (samma som canonical i index.html).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^www\.jockestaxi\.se$ [NC]
+  RewriteRule ^ https://www.jockestaxi.se%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ---- Egen 404-sida -----------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# ---- Komprimering (snabbare laddning) ----------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
+  AddOutputFilterByType DEFLATE application/json image/svg+xml application/manifest+json
+  AddOutputFilterByType DEFLATE text/xml application/xml
+</IfModule>
+
+# ---- Cache-headers -----------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # HTML: kort cache så uppdateringar syns snabbt
+  ExpiresByType text/html "access plus 1 hour"
+  # Statiska resurser: lång cache
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+# ---- Säkerhets-headers -------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  # HSTS aktiveras först när HTTPS bekräftat fungerar (avkommentera då):
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ---- Teckenkodning -----------------------------------------------------------
+AddDefaultCharset UTF-8

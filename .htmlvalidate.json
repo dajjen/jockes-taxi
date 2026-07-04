@@ -1,0 +1,8 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "void-style": "off",
+    "no-redundant-role": "off",
+    "tel-non-breaking": "off"
+  }
+}

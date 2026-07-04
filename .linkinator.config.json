@@ -1,0 +1,9 @@
+{
+  "recurse": true,
+  "skip": [
+    "^https?://(www\\.)?jockestaxi\\.se",
+    "facebook\\.com",
+    "instagram\\.com",
+    "og-image\\.png"
+  ]
+}

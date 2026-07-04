@@ -1,0 +1,333 @@
+<!--
+  ============================================================================
+  JOCKES TAXI — one page site
+  ----------------------------------------------------------------------------
+  PLATSHÅLLARE ATT FYLLA I (sök på "FYLL-I"):
+    1. Telefonnummer  — sök: FYLL-I-TELEFON   (byt både tel: och synlig text)
+    2. E-postadress   — sök: FYLL-I-EPOST
+    3. Facebook-länk  — sök: FYLL-I-FACEBOOK
+    4. Instagram-länk — sök: FYLL-I-INSTAGRAM
+    5. Domän/URL      — sök: FYLL-I-DOMAN     (canonical, og:url, sitemap, JSON-LD)
+    6. Org.nr         — sök: FYLL-I-ORGNR     (valfritt)
+    7. Riktiga omdömen — sök: FYLL-I-OMDOMEN  (byt exempeltexterna)
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jockes Taxi Gotland – Taxi i Visby och hela ön, dygnet runt</title>
+<meta name="description" content="Jockes Taxi – Gotlands bästa taxi. Vi kör dig dygnet runt över hela ön: Visby, Hemse, Slite, Fårösund, Fårö, Klintehamn och alla orter däremellan. Ring och boka din resa idag." />
+<meta name="keywords" content="taxi Gotland, taxi Visby, taxi Hemse, taxi Slite, taxi Fårösund, taxi Fårö, taxi Klintehamn, taxi Roma, flygtaxi Gotland, färjetaxi Visby, taxi dygnet runt Gotland" />
+<meta name="author" content="Jockes Taxi" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0C4A45" />
+
+<!-- FYLL-I-DOMAN: byt https://www.jockestaxi.se mot din riktiga domän här och nedan -->
+<link rel="canonical" href="https://www.jockestaxi.se/" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="sv_SE" />
+<meta property="og:site_name" content="Jockes Taxi" />
+<meta property="og:title" content="Jockes Taxi – Gotlands bästa taxi, dygnet runt" />
+<meta property="og:description" content="Vi kör dig över hela Gotland, dygnet runt året om. Från Visby till Fårö. Ring och boka." />
+<meta property="og:url" content="https://www.jockestaxi.se/" />
+<meta property="og:image" content="https://www.jockestaxi.se/og-image.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Jockes Taxi – Gotlands bästa taxi, dygnet runt" />
+<meta name="twitter:description" content="Vi kör dig över hela Gotland, dygnet runt året om. Från Visby till Fårö. Ring och boka." />
+<meta name="twitter:image" content="https://www.jockestaxi.se/og-image.png" />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="stylesheet" href="/styles.css" />
+
+<!-- Strukturerad data för lokal SEO (Google lokala resultat) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  "name": "Jockes Taxi",
+  "description": "Taxi över hela Gotland, dygnet runt. Visby, Hemse, Slite, Fårösund, Fårö och alla orter däremellan.",
+  "url": "https://www.jockestaxi.se/",
+  "telephone": "+4670XXXXXXX",
+  "email": "info@jockestaxi.se",
+  "image": "https://www.jockestaxi.se/og-image.png",
+  "priceRange": "$$",
+  "currenciesAccepted": "SEK",
+  "paymentAccepted": "Kontant, Kort, Swish",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Jockes Taxi",
+    "areaServed": "Gotland",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Gotland",
+      "addressCountry": "SE"
+    }
+  },
+  "areaServed": [
+    { "@type": "Place", "name": "Gotland" },
+    { "@type": "City", "name": "Visby" },
+    { "@type": "Place", "name": "Hemse" },
+    { "@type": "Place", "name": "Slite" },
+    { "@type": "Place", "name": "Fårösund" },
+    { "@type": "Place", "name": "Fårö" },
+    { "@type": "Place", "name": "Klintehamn" },
+    { "@type": "Place", "name": "Roma" },
+    { "@type": "Place", "name": "Burgsvik" },
+    { "@type": "Place", "name": "Ljugarn" },
+    { "@type": "Place", "name": "Katthammarsvik" },
+    { "@type": "Place", "name": "Tofta" },
+    { "@type": "Place", "name": "Lärbro" },
+    { "@type": "Place", "name": "Havdhem" }
+  ],
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 57.6348,
+    "longitude": 18.2948
+  }
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#huvudinnehall">Hoppa till innehåll</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Jockes Taxi — till toppen">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" role="img" aria-hidden="true">
+          <rect x="2" y="13" width="28" height="11" rx="2.5" fill="currentColor" />
+          <path d="M7 13 L10 7 h12 l3 6 Z" fill="currentColor" />
+          <circle cx="10" cy="24.5" r="3.2" fill="#1E2A2C" />
+          <circle cx="22" cy="24.5" r="3.2" fill="#1E2A2C" />
+          <rect x="12" y="9" width="8" height="2.4" rx="0.6" fill="#0C4A45" />
+        </svg>
+      </span>
+      <span class="brand-name">Jockes&nbsp;Taxi</span>
+    </a>
+
+    <nav class="nav" aria-label="Huvudmeny">
+      <a href="#omraden">Vart vi kör</a>
+      <a href="#omdomen">Omdömen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- FYLL-I-TELEFON -->
+    <a class="btn btn-call header-call" href="tel:+4670XXXXXXX">
+      <span class="btn-call-ico" aria-hidden="true">📞</span>
+      <span>Ring&nbsp;070&nbsp;–&nbsp;XXX&nbsp;XX&nbsp;XX</span>
+    </a>
+  </div>
+</header>
+
+<main id="huvudinnehall">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" aria-labelledby="hero-rubrik">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Taxi · Hela Gotland · Dygnet runt</p>
+      <h1 id="hero-rubrik">Gotlands bästa taxi.</h1>
+      <p class="hero-lead">
+        Jocke kör dig dit du ska — över hela ön, dygnet runt, året om.
+        Från färjeläget i Visby till raukarna på Fårö, och allt däremellan.
+      </p>
+      <div class="hero-cta">
+        <!-- FYLL-I-TELEFON -->
+        <a class="btn btn-call btn-lg" href="tel:+4670XXXXXXX">
+          <span class="btn-call-ico" aria-hidden="true">📞</span>
+          <span>Ring och boka nu</span>
+        </a>
+        <!-- FYLL-I-TELEFON (samma nummer, sms-länk) -->
+        <a class="btn btn-ghost btn-lg" href="sms:+4670XXXXXXX">SMS:a din resa</a>
+      </div>
+      <p class="hero-note">Öppet just nu — vi svarar dygnet runt, alla dagar.</p>
+    </div>
+
+    <!-- Rauk-silhuett: Gotlands kalkstenspelare vid horisonten -->
+    <div class="hero-horizon" aria-hidden="true">
+      <svg viewBox="0 0 1440 140" preserveAspectRatio="none" width="100%" height="140">
+        <path d="M0,140 L0,96
+          C120,90 220,92 300,96
+          L318,96 L322,70 L330,70 L334,96
+          L360,96 C440,96 520,86 600,88
+          L720,90 L726,58 L731,50 L737,58 L743,90
+          L820,92 C920,94 1010,100 1120,96
+          L1150,96 L1156,74 L1164,74 L1169,96
+          L1200,96 C1300,96 1380,92 1440,96
+          L1440,140 Z" fill="var(--sea-deep)" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ================= USP ================= -->
+  <section class="usp" aria-label="Därför Jockes Taxi">
+    <div class="wrap usp-grid">
+      <article class="usp-card">
+        <span class="usp-num">01</span>
+        <h2>Hela Gotland</h2>
+        <p>Från Visby till Fårö — vi kör över hela ön. Inga sträckor är för långa och inga byar för små.</p>
+      </article>
+      <article class="usp-card">
+        <span class="usp-num">02</span>
+        <h2>Dygnet runt</h2>
+        <p>Öppet dygnet runt, året om. Tidig morgonfärja, sen nattbuss eller flyg klockan fem — vi finns där.</p>
+      </article>
+      <article class="usp-card">
+        <span class="usp-num">03</span>
+        <h2>Trygg &amp; lokal</h2>
+        <p>Lokalkännedom om varenda väg på ön och fast pris innan du kliver in. Inga överraskningar.</p>
+      </article>
+      <article class="usp-card">
+        <span class="usp-num">04</span>
+        <h2>Alltid framme</h2>
+        <p>Ring så är vi på väg. Boka i förväg för färja, flyg och sjukresor — eller bara när det passar.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= TÄCKNINGSOMRÅDE ================= -->
+  <section class="areas" id="omraden" aria-labelledby="omraden-rubrik">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-dark">Vart vi kör</p>
+      <h2 id="omraden-rubrik" class="section-title">Taxi i hela Gotland</h2>
+      <p class="section-lead">
+        Vi hämtar och lämnar i alla orter på ön. Här är några av platserna vi kör till och från
+        varje dag — hittar du inte din by, ring ändå. Vi kör överallt på Gotland.
+      </p>
+      <ul class="area-grid" role="list">
+        <li>Visby</li>
+        <li>Hemse</li>
+        <li>Slite</li>
+        <li>Fårösund</li>
+        <li>Fårö</li>
+        <li>Klintehamn</li>
+        <li>Roma</li>
+        <li>Burgsvik</li>
+        <li>Ljugarn</li>
+        <li>Katthammarsvik</li>
+        <li>Tofta</li>
+        <li>Lärbro</li>
+        <li>Havdhem</li>
+        <li>Väskinde</li>
+        <li>Vamlingbo</li>
+        <li>Kräklingbo</li>
+      </ul>
+      <p class="area-foot">…och alla vägar däremellan. <strong>Hela Gotland, dygnet runt.</strong></p>
+    </div>
+  </section>
+
+  <!-- ================= OMDÖMEN ================= -->
+  <!-- FYLL-I-OMDOMEN: exempeltexter nedan — byt mot riktiga kundomdömen -->
+  <section class="reviews" id="omdomen" aria-labelledby="omdomen-rubrik">
+    <div class="wrap">
+      <p class="eyebrow">Omdömen</p>
+      <h2 id="omdomen-rubrik" class="section-title">Vad kunderna säger</h2>
+      <div class="review-grid">
+        <figure class="review-card">
+          <div class="stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</div>
+          <blockquote>
+            Bokade taxi till morgonfärjan och Jocke var på plats i god tid. Trevlig, snabb och
+            körde mjukt hela vägen. Enda taxin jag ringer på Gotland numera.
+          </blockquote>
+          <figcaption>— Anna, Visby</figcaption>
+        </figure>
+        <figure class="review-card">
+          <div class="stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</div>
+          <blockquote>
+            Ringde mitt i natten när bilen krånglade i Slite. Jocke svarade direkt och hämtade
+            oss inom en halvtimme. Ovärderligt att veta att det alltid finns någon.
+          </blockquote>
+          <figcaption>— Per, Slite</figcaption>
+        </figure>
+        <figure class="review-card">
+          <div class="stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</div>
+          <blockquote>
+            Vi bor i Fårösund och tar alltid Jocke till flyget. Fast pris, alltid i tid och
+            trevligt sällskap hela vägen. Rekommenderas varmt.
+          </blockquote>
+          <figcaption>— Maria, Fårösund</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KONTAKT / BOKA ================= -->
+  <section class="contact" id="kontakt" aria-labelledby="kontakt-rubrik">
+    <div class="wrap contact-inner">
+      <p class="eyebrow eyebrow-on-sea">Kontakt &amp; bokning</p>
+      <h2 id="kontakt-rubrik" class="section-title contact-title">Ring så kör vi.</h2>
+      <p class="contact-lead">
+        Enklast bokar du genom att ringa. Vill du hellre skriva går det lika bra —
+        vi svarar dygnet runt, alla dagar på året.
+      </p>
+
+      <div class="contact-actions">
+        <!-- FYLL-I-TELEFON -->
+        <a class="btn btn-call btn-lg btn-block" href="tel:+4670XXXXXXX">
+          <span class="btn-call-ico" aria-hidden="true">📞</span>
+          <span>Ring 070&nbsp;–&nbsp;XXX&nbsp;XX&nbsp;XX</span>
+        </a>
+      </div>
+
+      <ul class="contact-list" role="list">
+        <!-- FYLL-I-TELEFON -->
+        <li>
+          <span class="contact-label">SMS</span>
+          <a href="sms:+4670XXXXXXX">070 – XXX XX XX</a>
+        </li>
+        <!-- FYLL-I-EPOST -->
+        <li>
+          <span class="contact-label">E-post</span>
+          <a href="mailto:info@jockestaxi.se">info@jockestaxi.se</a>
+        </li>
+        <!-- FYLL-I-FACEBOOK -->
+        <li>
+          <span class="contact-label">Facebook</span>
+          <a href="https://facebook.com/" rel="noopener" target="_blank">Följ oss på Facebook</a>
+        </li>
+        <!-- FYLL-I-INSTAGRAM -->
+        <li>
+          <span class="contact-label">Instagram</span>
+          <a href="https://instagram.com/" rel="noopener" target="_blank">@jockestaxi</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">Jockes Taxi</span>
+      <p>Taxi över hela Gotland — dygnet runt, året om.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Sidfot">
+      <a href="#omraden">Vart vi kör</a>
+      <a href="#omdomen">Omdömen</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#top">Till toppen ↑</a>
+    </nav>
+    <p class="footer-legal">
+      © <span id="ar">2026</span> Jockes Taxi · Gotland
+      <!-- FYLL-I-ORGNR --> · Org.nr XXXXXX–XXXX
+    </p>
+  </div>
+</footer>
+
+<script src="/main.js" defer></script>
+</body>
+</html>

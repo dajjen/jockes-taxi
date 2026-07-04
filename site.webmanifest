@@ -1,0 +1,13 @@
+{
+  "name": "Jockes Taxi",
+  "short_name": "Jockes Taxi",
+  "description": "Taxi över hela Gotland, dygnet runt.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F1ECE1",
+  "theme_color": "#0C4A45",
+  "lang": "sv-SE",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" }
+  ]
+}
