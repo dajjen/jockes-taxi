@@ -120,17 +120,17 @@ i `.linkinator.config.json` tills de är riktiga.
 ## Recensionsformulär (e-post)
 
 Formuläret i Omdömen-sektionen POSTar till `send-review.php`, som mailar recensionen
-till **recension@jockestaxi.se** via serverns PHP `mail()`.
+till **info@jockestaxi.se** via serverns PHP `mail()`.
 
 Innan det fungerar i skarpt läge:
 
-1. **Skapa e-postkontot** `recension@jockestaxi.se` i DirectAdmin (*E-Mail Accounts*).
-2. **Avsändaradress:** skriptet skickar `From: no-reply@jockestaxi.se`. Skapa det kontot
-   (eller ändra `$FROM` högst upp i `send-review.php` till en adress som finns). Att skicka
-   från en @jockestaxi.se-adress minskar risken att mailen hamnar i skräpposten.
+1. **Skapa e-postkontot** `info@jockestaxi.se` i cPanel (*Email Accounts*). Både mottagare
+   (`$TO`) och avsändare (`$FROM`) använder den adressen, så det räcker med ett konto.
+2. Besökarens egen e-post (om den anges) sätts som `Reply-To` — tryck bara "Svara" för att
+   mejla tillbaka. `From` är alltid @jockestaxi.se för att klara SPF/DKIM och inte fastna i skräpposten.
 3. Skydd mot spam finns inbyggt: en dold honungsfälla + skydd mot header-injektion.
 
-Vill du ändra mottagaradressen: byt `$TO` överst i `send-review.php`.
+Vill du ändra mottagar-/avsändaradress: byt `$TO` / `$FROM` överst i `send-review.php`.
 
 ---
 

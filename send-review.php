@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/review-lib.php';
 
-$TO   = 'recension@jockestaxi.se';
-$FROM = 'no-reply@jockestaxi.se'; // måste vara en @jockestaxi.se-adress
+$TO   = 'info@jockestaxi.se';
+$FROM = 'info@jockestaxi.se'; // måste vara en @jockestaxi.se-adress (för SPF/DKIM)
 
 /** Skicka tillbaka till formuläret med en status och avsluta. */
 function tillbaka(string $status): void
