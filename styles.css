@@ -33,6 +33,10 @@
 
 html { scroll-behavior: smooth; }
 
+/* Kompensera för den fastnålade headern så rubriker inte hamnar bakom den. */
+main[id],
+section[id] { scroll-margin-top: 80px; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
@@ -367,6 +371,76 @@ img, svg { max-width: 100%; display: block; }
   color: var(--muted);
 }
 
+/* ---------- Recensionsformulär ---------- */
+.review-form-wrap {
+  margin-top: 40px;
+  background: var(--ground);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  scroll-margin-top: 80px;
+}
+.review-form-title { font-size: 1.5rem; color: var(--sea); margin-bottom: 8px; }
+.review-form-lead { color: var(--muted); margin-bottom: 22px; max-width: 60ch; }
+.review-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field-full { grid-column: 1 / -1; }
+.review-form label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sea);
+}
+.review-form .req { color: var(--sand-deep); }
+.review-form .opt {
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-body);
+}
+.review-form input,
+.review-form select,
+.review-form textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  width: 100%;
+}
+.review-form textarea { resize: vertical; min-height: 120px; }
+.review-form input:focus-visible,
+.review-form select:focus-visible,
+.review-form textarea:focus-visible {
+  outline: 3px solid var(--sand);
+  outline-offset: 1px;
+  border-color: var(--sand);
+}
+.review-form button { justify-self: start; }
+/* Honungsfälla — dold för människor men syns för bottar. */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form-status {
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+.form-status.ok { background: #e4f4ea; color: #14533a; border: 1px solid #b9e0c8; }
+.form-status.err { background: #fbe7e0; color: #8a2f16; border: 1px solid #f0c4b4; }
+
 /* ---------- Kontakt ---------- */
 .contact {
   background: linear-gradient(168deg, var(--sea) 0%, var(--sea-deep) 100%);
@@ -454,6 +528,7 @@ img, svg { max-width: 100%; display: block; }
   .hero-cta .btn { width: auto; }
   .area-grid { grid-template-columns: repeat(3, 1fr); }
   .usp-grid { grid-template-columns: repeat(2, 1fr); }
+  .review-form { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 860px) {

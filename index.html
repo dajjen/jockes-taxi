@@ -3,13 +3,10 @@
   JOCKES TAXI — one page site
   ----------------------------------------------------------------------------
   PLATSHÅLLARE ATT FYLLA I (sök på "FYLL-I"):
-    1. Telefonnummer  — sök: FYLL-I-TELEFON   (byt både tel: och synlig text)
-    2. E-postadress   — sök: FYLL-I-EPOST
-    3. Facebook-länk  — sök: FYLL-I-FACEBOOK
-    4. Instagram-länk — sök: FYLL-I-INSTAGRAM
-    5. Domän/URL      — sök: FYLL-I-DOMAN     (canonical, og:url, sitemap, JSON-LD)
-    6. Org.nr         — sök: FYLL-I-ORGNR     (valfritt)
-    7. Riktiga omdömen — sök: FYLL-I-OMDOMEN  (byt exempeltexterna)
+    1. E-postadress   — sök: FYLL-I-EPOST
+    2. Facebook-länk  — sök: FYLL-I-FACEBOOK
+    3. Domän/URL      — sök: FYLL-I-DOMAN     (canonical, og:url, sitemap, JSON-LD)
+    4. Riktiga omdömen — sök: FYLL-I-OMDOMEN  (byt exempeltexterna)
   ============================================================================
 -->
 <!DOCTYPE html>
@@ -54,7 +51,7 @@
   "name": "Jockes Taxi",
   "description": "Taxi över hela Gotland, dygnet runt. Visby, Hemse, Slite, Fårösund, Fårö och alla orter däremellan.",
   "url": "https://www.jockestaxi.se/",
-  "telephone": "+4670XXXXXXX",
+  "telephone": "+46722108050",
   "email": "info@jockestaxi.se",
   "image": "https://www.jockestaxi.se/og-image.png",
   "priceRange": "$$",
@@ -102,9 +99,10 @@
 </head>
 
 <body>
+<span id="top" aria-hidden="true"></span>
 <a class="skip-link" href="#huvudinnehall">Hoppa till innehåll</a>
 
-<header class="site-header" id="top">
+<header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="#top" aria-label="Jockes Taxi — till toppen">
       <span class="brand-mark" aria-hidden="true">
@@ -125,10 +123,9 @@
       <a href="#kontakt">Kontakt</a>
     </nav>
 
-    <!-- FYLL-I-TELEFON -->
-    <a class="btn btn-call header-call" href="tel:+4670XXXXXXX">
+    <a class="btn btn-call header-call" href="tel:+46722108050">
       <span class="btn-call-ico" aria-hidden="true">📞</span>
-      <span>Ring&nbsp;070&nbsp;–&nbsp;XXX&nbsp;XX&nbsp;XX</span>
+      <span>Ring&nbsp;072&nbsp;–&nbsp;210&nbsp;80&nbsp;50</span>
     </a>
   </div>
 </header>
@@ -139,19 +136,18 @@
   <section class="hero" aria-labelledby="hero-rubrik">
     <div class="wrap hero-inner">
       <p class="eyebrow">Taxi · Hela Gotland · Dygnet runt</p>
-      <h1 id="hero-rubrik">Gotlands bästa taxi.</h1>
+      <h1 id="hero-rubrik">Gotlands bästa taxi</h1>
       <p class="hero-lead">
         Jocke kör dig dit du ska — över hela ön, dygnet runt, året om.
         Från färjeläget i Visby till raukarna på Fårö, och allt däremellan.
+        Två bilar tar 4 respektive 6 passagerare — lika bra för ensamresan som för hela sällskapet.
       </p>
       <div class="hero-cta">
-        <!-- FYLL-I-TELEFON -->
-        <a class="btn btn-call btn-lg" href="tel:+4670XXXXXXX">
+        <a class="btn btn-call btn-lg" href="tel:+46722108050">
           <span class="btn-call-ico" aria-hidden="true">📞</span>
           <span>Ring och boka nu</span>
         </a>
-        <!-- FYLL-I-TELEFON (samma nummer, sms-länk) -->
-        <a class="btn btn-ghost btn-lg" href="sms:+4670XXXXXXX">SMS:a din resa</a>
+        <a class="btn btn-ghost btn-lg" href="sms:+46722108050">Boka via SMS</a>
       </div>
       <p class="hero-note">Öppet just nu — vi svarar dygnet runt, alla dagar.</p>
     </div>
@@ -188,7 +184,7 @@
       <article class="usp-card">
         <span class="usp-num">03</span>
         <h2>Trygg &amp; lokal</h2>
-        <p>Lokalkännedom om varenda väg på ön och fast pris innan du kliver in. Inga överraskningar.</p>
+        <p>En trygg och säker resa varje gång — lugn körning, lokalkännedom om varenda väg på ön och fast pris innan du kliver in. Inga överraskningar.</p>
       </article>
       <article class="usp-card">
         <span class="usp-num">04</span>
@@ -261,6 +257,53 @@
           <figcaption>— Maria, Fårösund</figcaption>
         </figure>
       </div>
+
+      <div class="review-form-wrap" id="recensera">
+        <h3 class="review-form-title">Lämna din recension</h3>
+        <p class="review-form-lead">
+          Har du åkt med Jockes Taxi? Berätta hur resan var — det hjälper andra på ön att hitta rätt.
+        </p>
+
+        <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
+
+        <form class="review-form" action="/send-review.php" method="post">
+          <div class="field">
+            <label for="f-namn">Namn <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="f-namn" name="namn" required maxlength="80" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="f-ort">Ort</label>
+            <input type="text" id="f-ort" name="ort" maxlength="80" placeholder="T.ex. Visby" />
+          </div>
+          <div class="field">
+            <label for="f-epost">E-post <span class="opt">(valfritt)</span></label>
+            <input type="email" id="f-epost" name="epost" maxlength="120" autocomplete="email" placeholder="Om du vill ha svar" />
+          </div>
+          <div class="field">
+            <label for="f-betyg">Betyg <span class="req" aria-hidden="true">*</span></label>
+            <select id="f-betyg" name="betyg" required>
+              <option value="5">★★★★★ – Utmärkt</option>
+              <option value="4">★★★★☆ – Mycket bra</option>
+              <option value="3">★★★☆☆ – Bra</option>
+              <option value="2">★★☆☆☆ – Okej</option>
+              <option value="1">★☆☆☆☆ – Mindre bra</option>
+            </select>
+          </div>
+          <div class="field field-full">
+            <label for="f-recension">Din recension <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="f-recension" name="recension" required rows="5" maxlength="1500"
+              placeholder="Hur var resan med Jocke?"></textarea>
+          </div>
+          <!-- Honungsfälla mot spam-bottar: människor ser inte fältet och lämnar det tomt. -->
+          <div class="hp" aria-hidden="true">
+            <label for="f-webbplats">Lämna detta fält tomt</label>
+            <input type="text" id="f-webbplats" name="webbplats" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="field field-full">
+            <button type="submit" class="btn btn-call btn-lg">Skicka recension</button>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -275,18 +318,16 @@
       </p>
 
       <div class="contact-actions">
-        <!-- FYLL-I-TELEFON -->
-        <a class="btn btn-call btn-lg btn-block" href="tel:+4670XXXXXXX">
+        <a class="btn btn-call btn-lg btn-block" href="tel:+46722108050">
           <span class="btn-call-ico" aria-hidden="true">📞</span>
-          <span>Ring 070&nbsp;–&nbsp;XXX&nbsp;XX&nbsp;XX</span>
+          <span>Ring 072&nbsp;–&nbsp;210&nbsp;80&nbsp;50</span>
         </a>
       </div>
 
       <ul class="contact-list" role="list">
-        <!-- FYLL-I-TELEFON -->
         <li>
           <span class="contact-label">SMS</span>
-          <a href="sms:+4670XXXXXXX">070 – XXX XX XX</a>
+          <a href="sms:+46722108050">072 – 210 80 50</a>
         </li>
         <!-- FYLL-I-EPOST -->
         <li>
@@ -297,11 +338,6 @@
         <li>
           <span class="contact-label">Facebook</span>
           <a href="https://facebook.com/" rel="noopener" target="_blank">Följ oss på Facebook</a>
-        </li>
-        <!-- FYLL-I-INSTAGRAM -->
-        <li>
-          <span class="contact-label">Instagram</span>
-          <a href="https://instagram.com/" rel="noopener" target="_blank">@jockestaxi</a>
         </li>
       </ul>
     </div>
@@ -323,7 +359,6 @@
     </nav>
     <p class="footer-legal">
       © <span id="ar">2026</span> Jockes Taxi · Gotland
-      <!-- FYLL-I-ORGNR --> · Org.nr XXXXXX–XXXX
     </p>
   </div>
 </footer>
