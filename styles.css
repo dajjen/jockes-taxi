@@ -179,10 +179,10 @@ img, svg { max-width: 100%; display: block; }
   color: var(--sea);
   margin-right: auto;
 }
-.brand-mark { display: inline-flex; color: var(--sand); }
 .brand-text {
   display: flex;
   flex-direction: column;
+  align-items: center;
   line-height: 1;
 }
 .brand-name {
@@ -197,9 +197,8 @@ img, svg { max-width: 100%; display: block; }
   font-family: "Jockes Script", cursive;
   font-size: 1.05rem;
   line-height: 1;
-  color: var(--sea);
+  color: var(--sand);
   margin-top: -3px;
-  margin-left: 3px;
 }
 /* Mobil: menyn är en utfällbar panel under headern. */
 .nav {
