@@ -14,6 +14,7 @@
   --sea-soft:   #0F5A54;   /* hover på hav */
   --sand:       #E0A24A;   /* sandsten — CTA */
   --sand-deep:  #C6852F;   /* CTA hover */
+  --brand-blue: #1E3FB4;   /* loggans blå (matchar bilen) */
   --line:       #DED6C6;   /* linjer på kalksten */
   --line-sea:   rgba(241, 236, 225, 0.18);
 
@@ -25,6 +26,15 @@
   --radius: 16px;
   --radius-sm: 10px;
   --shadow: 0 1px 2px rgba(30, 42, 44, 0.06), 0 8px 28px rgba(30, 42, 44, 0.08);
+}
+
+/* Loggans brush-skrift — matchar texten på bilen (självhostad, inga externa anrop). */
+@font-face {
+  font-family: "Jockes Script";
+  src: url("/fonts/jockes-script.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 *,
@@ -170,12 +180,26 @@ img, svg { max-width: 100%; display: block; }
   margin-right: auto;
 }
 .brand-mark { display: inline-flex; color: var(--sand); }
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
 .brand-name {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.22rem;
-  letter-spacing: -0.02em;
+  font-family: "Jockes Script", cursive;
+  font-weight: 400;
+  font-size: 1.7rem;
+  letter-spacing: 0;
+  line-height: 1.05;
+  color: var(--brand-blue);
+}
+.brand-sub {
+  font-family: "Jockes Script", cursive;
+  font-size: 1.05rem;
+  line-height: 1;
   color: var(--sea);
+  margin-top: -3px;
+  margin-left: 3px;
 }
 /* Mobil: menyn är en utfällbar panel under headern. */
 .nav {
