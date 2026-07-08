@@ -10,7 +10,9 @@ declare(strict_types=1);
 require __DIR__ . '/review-lib.php';
 
 $TO   = 'info@jockestaxi.se';
-$FROM = 'info@jockestaxi.se'; // måste vara en @jockestaxi.se-adress (för SPF/DKIM)
+// Avsändare: egen domän (så DKIM linjerar), men skild från mottagaren info@
+// för att undvika "skickat-till-sig-själv"-mönstret som vissa spamfilter ogillar.
+$FROM = 'no-reply@jockestaxi.se';
 
 /** Skicka tillbaka till formuläret med en status och avsluta. */
 function tillbaka(string $status): void
