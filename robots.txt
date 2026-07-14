@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# FYLL-I-DOMAN: byt mot din riktiga domän
 Sitemap: https://www.jockestaxi.se/sitemap.xml
