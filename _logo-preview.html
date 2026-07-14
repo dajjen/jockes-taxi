@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logga-förslag — Jockes Taxi</title>
+<style>
+  :root{ --sea:#0C4A45; --ground:#F1ECE1; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1E2A2C;background:#fff}
+  header{padding:22px 28px;border-bottom:1px solid #e6ddcc}
+  header h1{margin:0;font-size:1.25rem}
+  header p{margin:4px 0 0;color:#667}
+  .row{padding:26px 28px}
+  .label{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#8a8577;margin-bottom:14px}
+  .card{border-radius:14px;padding:26px 30px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .on-light{background:var(--ground)} .on-sea{background:var(--sea)} .on-white{background:#fff;border:1px solid #eee}
+  .emblem{height:64px;width:auto;display:block}
+  .wordmark{height:64px;width:auto;display:block}
+  .compare{display:flex;gap:40px;flex-wrap:wrap}
+  .compare figure{margin:0;text-align:center}
+  .compare img{height:150px}
+  .compare figcaption{font:600 .8rem/1 ui-monospace,monospace;color:#556;margin-top:10px}
+  .sizes{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
+  .sizes figure{margin:0;text-align:center}
+  .sizes figcaption{font:600 .7rem/1 ui-monospace,monospace;color:#8a8577;margin-top:8px}
+  .divider{height:1px;background:#eee;margin:0 28px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Logga-förslag: kvarn + rauk</h1>
+  <p>Tunn handritad linje i havsgrön (#0C4A45), efter dina referensbilder. Inget är integrerat i sajten än.</p>
+</header>
+
+<div class="row">
+  <div class="label">1 · Lockup på kalksten (som headern) — rauk v10</div>
+  <div class="card on-light">
+    <img class="emblem" src="/_emblem.svg" alt="emblem" />
+    <img class="wordmark" src="/assets/images/logo/logo.svg" alt="Jockes Taxi Gotland" />
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="row">
+  <div class="label">2 · Lockup på havsgrön (som footern) — ljus emblem-variant</div>
+  <div class="card on-sea">
+    <img class="emblem" src="/_emblem-light.svg" alt="emblem" />
+    <img class="wordmark" src="/assets/images/logo/logo-mono.svg" alt="Jockes Taxi Gotland" />
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="row">
+  <div class="label">3 · Välj rauk-form: v8 (tung/rund) vs v10 (asymmetrisk/kraggig)</div>
+  <div class="card on-white compare">
+    <figure><img src="/_emblem-v8.svg" alt="v8" /><figcaption>v8 — tung &amp; rund</figcaption></figure>
+    <figure><img src="/_emblem.svg" alt="v10" /><figcaption>v10 — asymmetrisk &amp; kraggig</figcaption></figure>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="row">
+  <div class="label">4 · Favikon-storlekar (v10)</div>
+  <div class="card on-white sizes">
+    <figure><img src="/_emblem.svg" style="height:64px"><figcaption>64px</figcaption></figure>
+    <figure><img src="/_emblem.svg" style="height:48px"><figcaption>48px</figcaption></figure>
+    <figure><img src="/_emblem.svg" style="height:32px"><figcaption>32px</figcaption></figure>
+    <figure><img src="/_emblem.svg" style="height:16px"><figcaption>16px</figcaption></figure>
+  </div>
+</div>
+</body>
+</html>
