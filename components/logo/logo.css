@@ -1,0 +1,33 @@
+/* ============================================================================
+   KOMPONENT: Logo — "Jockes Taxi / Gotland"
+   ----------------------------------------------------------------------------
+   Wordmark levereras som SVG med PNG-fallback (se assets/images/logo/).
+   Loggans font (Satisfy) är INBÄDDAD i SVG:n — sidan laddar ingen egen webfont.
+   Markup: se components/logo/logo.html
+   ========================================================================== */
+
+/* Länken runt loggan i toppen. margin-right:auto puttar navigationen åt höger. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: auto;
+}
+.brand > picture,
+.brand > img { display: block; }
+
+/* width/height-attributen på <img> ger rätt bildförhållande (undviker layout-shift);
+   höjden nedan styr faktisk storlek, bredden följer med. */
+.brand__img {
+  display: block;
+  width: auto;
+  height: 64px;
+}
+
+/* Footer: vit variant på mörk botten. */
+.footer-brand .brand { margin-right: 0; }
+.footer-brand__img {
+  display: block;
+  width: auto;
+  height: 56px;
+}

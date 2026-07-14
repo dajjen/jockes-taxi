@@ -1,0 +1,32 @@
+<!-- ============================================================================
+     KOMPONENT: Logo — markup-referens
+     ----------------------------------------------------------------------------
+     Statisk sajt utan template-includes, så detta är en kopieringsmall.
+     Styling: components/logo/logo.css  ·  Bilder: assets/images/logo/
+
+     <picture> ger formatfallback: SVG används där det stöds (skarpt i alla
+     storlekar), annars PNG. alt-texten är text-fallbacken för skärmläsare.
+     ============================================================================ -->
+
+<!-- Header (färgversion) -->
+<a class="brand" href="#top" aria-label="Jockes Taxi — Gotland, till toppen">
+  <picture>
+    <source srcset="/assets/images/logo/logo.svg" type="image/svg+xml" />
+    <img class="brand__img" src="/assets/images/logo/logo.png"
+         width="468" height="235" alt="Jockes Taxi Gotland" decoding="async" />
+  </picture>
+</a>
+
+<!-- Footer (vit mono-variant för mörk botten) -->
+<a class="brand" href="#top" aria-label="Jockes Taxi — Gotland">
+  <picture>
+    <source srcset="/assets/images/logo/logo-mono.svg" type="image/svg+xml" />
+    <img class="footer-brand__img" src="/assets/images/logo/logo-mono.png"
+         width="468" height="235" alt="Jockes Taxi Gotland" decoding="async" />
+  </picture>
+</a>
+
+<!--
+  Övriga varianter i assets/images/logo/:
+    logo-square.svg / logo-square.png  — 1:1 (1024×1024), t.ex. og:image / delning
+-->
