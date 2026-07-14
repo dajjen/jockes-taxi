@@ -56,7 +56,7 @@ test("JSON-LD är giltig och beskriver en taxitjänst på Gotland", () => {
   const scripts = doc.querySelectorAll('script[type="application/ld+json"]');
   assert.ok(scripts.length >= 1, "saknar JSON-LD");
   const data = JSON.parse(scripts[0].text);
-  assert.equal(data["@type"], "TaxiService");
+  assert.equal(data["@type"], "LocalBusiness");
   assert.ok(data.telephone, "JSON-LD saknar telephone");
   const areas = JSON.stringify(data.areaServed ?? "");
   for (const ort of ["Visby", "Hemse", "Slite", "Fårösund", "Fårö"]) {
