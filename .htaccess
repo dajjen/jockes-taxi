@@ -32,13 +32,19 @@ ErrorDocument 404 /404.html
   ExpiresActive On
   # HTML: kort cache så uppdateringar syns snabbt
   ExpiresByType text/html "access plus 1 hour"
-  # Statiska resurser: lång cache
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
+  # Bilder/typsnitt: lång cache (filnamn ändras vid ny version)
   ExpiresByType image/svg+xml "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+# DEV: CSS/JS revalideras mot servern varje gång (billiga 304-svar) så ändringar
+# syns direkt. TODO produktion: byt till lång cache + cache-busting (?v=...).
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
 # ---- Säkerhets-headers -------------------------------------------------------
