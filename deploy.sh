@@ -26,6 +26,9 @@ rsync -avz \
   --exclude='.gitignore' \
   --exclude='*.md' \
   --exclude='deploy.sh' \
+  --exclude='.claude' \
+  --exclude='docs' \
+  --exclude='Untitled' \
   -e "ssh -p $SSH_PORT -i $SSH_KEY" \
   ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH/"
 
