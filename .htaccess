@@ -7,6 +7,9 @@ DirectoryIndex index.html
 
 # ---- Kanonisk URL: tvinga HTTPS + www ----------------------------------------
 # Allt pekas mot https://www.jockestaxi.se (samma som canonical i index.html).
+# Detta fångar även alternativa domäner som pekas hit (t.ex. jocketaxi.se,
+# www.jocketaxi.se) och 301-redirectar dem till den kanoniska adressen —
+# så länge domänen serveras från samma dokumentrot (se domänpekare i DirectAdmin).
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTPS} !=on [OR]

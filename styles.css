@@ -545,6 +545,61 @@ img, svg { max-width: 100%; display: block; }
 }
 .contact-list a:hover { border-bottom-color: var(--sand); }
 
+/* ---------- Vanliga frågor (FAQ) ---------- */
+.faq {
+  padding-block: 64px;
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+.faq-inner { max-width: 760px; }
+.faq-list {
+  margin-top: 24px;
+  display: grid;
+  gap: 12px;
+}
+.faq-item {
+  background: var(--ground);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 22px;
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--sea);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--sand);
+  transition: transform 0.2s ease;
+  flex: none;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:hover { color: var(--sea-soft); }
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: -2px;
+  border-radius: var(--radius);
+}
+.faq-answer {
+  padding: 0 22px 20px;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.faq-answer p { margin: 0; }
+.faq-answer a { color: var(--sea); font-weight: 600; }
+
 /* ---------- Footer ---------- */
 .site-footer {
   background: var(--sea-deep);
