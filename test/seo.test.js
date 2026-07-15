@@ -63,6 +63,20 @@ test("JSON-LD är giltig och beskriver en taxitjänst på Gotland", () => {
   for (const ort of ["Visby", "Hemse", "Slite", "Fårösund", "Fårö"]) {
     assert.match(areas, new RegExp(ort), `areaServed saknar ${ort}`);
   }
+
+  const sameAs = [].concat(data.sameAs ?? []);
+  assert.ok(sameAs.length >= 2, "JSON-LD sameAs saknar profiler");
+  for (const url of sameAs) {
+    assert.match(url, /^https:\/\//, `sameAs-URL är inte https: ${url}`);
+  }
+  assert.ok(
+    sameAs.some((u) => /google\.|share\.google/.test(u)),
+    "sameAs saknar Google-profil"
+  );
+  assert.ok(
+    sameAs.some((u) => /facebook\.com/.test(u)),
+    "sameAs saknar Facebook-sida"
+  );
 });
 
 test("alla interna #-ankare pekar på ett element som finns", () => {
