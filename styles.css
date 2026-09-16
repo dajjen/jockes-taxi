@@ -599,6 +599,9 @@ img, svg { max-width: 100%; display: block; }
 }
 .faq-answer p { margin: 0; }
 .faq-answer a { color: var(--sea); font-weight: 600; }
+/* Egen FAQ-sida (/faq/): ingen övre kantlinje mot headern, luftigare topp */
+.faq-page { border-top: 0; padding-block: 48px 72px; }
+.faq-page .section-lead { margin-bottom: 0; }
 
 /* ---------- Footer ---------- */
 .site-footer {
