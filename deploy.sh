@@ -28,7 +28,8 @@ rsync -avz \
   --exclude='deploy.sh' \
   --exclude='.claude' \
   --exclude='docs' \
-  --exclude='Untitled' \
+  --exclude='_*' \
+  --exclude='components/logo/logo.html' \
   -e "ssh -p $SSH_PORT -i $SSH_KEY" \
   ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH/"
 

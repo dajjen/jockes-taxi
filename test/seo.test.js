@@ -27,8 +27,8 @@ test("title finns, är rimligt lång och nämner Taxi + Gotland", () => {
 
 test("meta description finns och nämner Gotland", () => {
   const desc = doc.querySelector('meta[name="description"]')?.getAttribute("content") ?? "";
-  assert.ok(desc.length >= 50 && desc.length <= 320,
-    `description bör vara 50–320 tecken, är ${desc.length}`);
+  assert.ok(desc.length >= 50 && desc.length <= 160,
+    `description bör vara 50–160 tecken, är ${desc.length}`);
   assert.match(desc, /gotland/i);
 });
 
