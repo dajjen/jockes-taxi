@@ -94,6 +94,21 @@ git push           # → tester + deploy körs automatiskt
 
 Följ körningen under fliken **Actions** i GitHub-repot.
 
+### Köra sajten lokalt med Lando
+
+Apache + PHP i container, så att `.htaccess` (redirects, 404-sida, headers) och
+recensionsformuläret beter sig som på Oderland:
+
+```bash
+lando start        # första gången hämtas PHP-imagen
+# → http://jockestaxi.lndo.site
+lando stop
+```
+
+`sendmail_path` är `/bin/true` i containern, så formuläret svarar `tack=1`
+utan att något mejl skickas. Validering och honeypot går att testa fullt ut.
+`.lando.yml` exkluderas vid deploy.
+
 ---
 
 ## Tester

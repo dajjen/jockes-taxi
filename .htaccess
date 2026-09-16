@@ -12,6 +12,8 @@ DirectoryIndex index.html
 # så länge domänen serveras från samma dokumentrot (se domänpekare i DirectAdmin).
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Lokal utveckling (Lando/localhost) ska inte skickas till produktion.
+  RewriteCond %{HTTP_HOST} !(\.lndo\.site|^localhost|^127\.0\.0\.1)(:[0-9]+)?$ [NC]
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} !^www\.jockestaxi\.se$ [NC]
   RewriteRule ^ https://www.jockestaxi.se%{REQUEST_URI} [R=301,L]

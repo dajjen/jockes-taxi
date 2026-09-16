@@ -27,6 +27,7 @@ rsync -avz \
   --exclude='*.md' \
   --exclude='deploy.sh' \
   --exclude='.claude' \
+  --exclude='.lando.yml' \
   --exclude='docs' \
   --exclude='_*' \
   --exclude='components/logo/logo.html' \

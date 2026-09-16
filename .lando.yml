@@ -1,0 +1,15 @@
+# Lokal utvecklingsmiljö för Jockes Taxi (Lando 3).
+# Apache + PHP så att .htaccess och send-review.php fungerar som på Oderland.
+# Start: lando start   →  http://jockestaxi.lndo.site
+# Obs: sendmail_path är /bin/true i containern, så mail() "lyckas" (tack=1)
+# men inget mejl skickas. Validering och honeypot går att testa fullt ut.
+name: jockestaxi
+services:
+  appserver:
+    type: php:8.2
+    via: apache
+    webroot: .
+    xdebug: false
+proxy:
+  appserver:
+    - jockestaxi.lndo.site
