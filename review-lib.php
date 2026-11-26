@@ -112,7 +112,15 @@ function review_rate_ok(string $katalog, string $nyckel, int $max, int $fonster,
     if (!is_dir($katalog) && !@mkdir($katalog, 0700, true) && !is_dir($katalog)) {
         return true;
     }
-    $fh = @fopen($katalog . '/' . hash('sha256', $nyckel) . '.txt', 'c+');
+    // Katalogen ska vara vår egen och filen en vanlig fil — följ aldrig symlänkar.
+    $fil = $katalog . '/' . hash('sha256', $nyckel) . '.txt';
+    if (is_link($katalog) || is_link($fil)) {
+        return true;
+    }
+    if (function_exists('posix_geteuid') && @fileowner($katalog) !== posix_geteuid()) {
+        return true;
+    }
+    $fh = @fopen($fil, 'c+');
     if ($fh === false) {
         return true;
     }
@@ -141,6 +149,19 @@ function review_rate_ok(string $katalog, string $nyckel, int $max, int $fonster,
     fclose($fh);
 
     return $ok;
+}
+
+/**
+ * Gör om en IP-adress till nyckel för spärren. IPv6 räknas per /64-nät: en enskild
+ * anslutning har normalt ett helt /64 och kan annars byta adress för varje inskick.
+ */
+function review_rate_ip(string $ip): string
+{
+    $bin = @inet_pton($ip);
+    if ($bin !== false && strlen($bin) === 16) {
+        return bin2hex(substr($bin, 0, 8)) . '/64';
+    }
+    return $ip;
 }
 
 /** Tar bort räknarfiler som inte rörts på $aldre sekunder, så katalogen inte växer. */

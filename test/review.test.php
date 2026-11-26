@@ -98,8 +98,22 @@ check('spärr: annan nyckel påverkas inte', review_rate_ok($dir, 'ip:5.6.7.8', 
 check('spärr: släpper igenom igen när fönstret passerat', review_rate_ok($dir, 'ip:1.2.3.4', 3, 600, $t + 700));
 check('spärr: filnamn avslöjar inte IP-adressen', !glob($dir . '/*1.2.3.4*'));
 check('spärr: oskrivbar katalog stoppar inte formuläret', review_rate_ok('/proc/finns-inte/x', 'ip:1.2.3.4', 3, 600, $t));
+
+// Symlänk i räknarkatalogen får aldrig följas (skulle kunna skriva över en annan fil)
+$mal = $dir . '/offer.dat';
+file_put_contents($mal, 'orört');
+symlink($mal, $dir . '/' . hash('sha256', 'ip:lank') . '.txt');
+review_rate_ok($dir, 'ip:lank', 3, 600, $t);
+check('spärr: symlänk följs inte (målfilen orörd)', file_get_contents($mal) === 'orört');
 array_map('unlink', glob($dir . '/*') ?: []);
 @rmdir($dir);
+
+// IPv6 räknas per /64, IPv4 per adress
+check('ip: två IPv6-adresser i samma /64 ger samma nyckel',
+    review_rate_ip('2001:db8:1:2::1') === review_rate_ip('2001:db8:1:2:ffff:ffff:ffff:ffff'));
+check('ip: olika /64 ger olika nycklar', review_rate_ip('2001:db8:1:2::1') !== review_rate_ip('2001:db8:1:3::1'));
+check('ip: IPv4 behålls som den är', review_rate_ip('1.2.3.4') === '1.2.3.4');
+check('ip: skräpvärde kraschar inte', review_rate_ip('okand') === 'okand');
 
 echo "\n$pass godkända, $fail underkända\n";
 exit($fail === 0 ? 0 : 1);

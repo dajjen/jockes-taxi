@@ -14,12 +14,11 @@ $TO   = 'info@jockestaxi.se';
 // för att undvika "skickat-till-sig-själv"-mönstret som vissa spamfilter ogillar.
 $FROM = 'no-reply@jockestaxi.se';
 
-// Spärr mot massutskick. Räknarfilerna läggs utanför webbroten (kontots hemkatalog
-// på Oderland); går det inte används systemets temp-katalog.
+// Spärr mot massutskick. Räknarfilerna läggs utanför webbroten, i kontots egen
+// hemkatalog på Oderland. Ingen reservkatalog i delade /tmp: där kan andra konton
+// plantera filer eller symlänkar. Går katalogen inte att skapa körs formuläret
+// utan spärr (review_rate_ok släpper då igenom).
 $RATE_DIR = dirname(__DIR__) . '/.jockestaxi-review-rate';
-if (!is_dir($RATE_DIR) && !@mkdir($RATE_DIR, 0700, true)) {
-    $RATE_DIR = sys_get_temp_dir() . '/jockestaxi-review-rate';
-}
 $RATE_IP_MAX     = 3;     // per IP-adress ...
 $RATE_IP_WINDOW  = 3600;  // ... och timme
 $RATE_ALL_MAX    = 30;    // totalt, oavsett avsändare ...
@@ -44,7 +43,7 @@ if (isset($r['error'])) { tillbaka('fel=' . $r['error']); }
 // Räknas först här, så att felifyllda formulär inte förbrukar några försök.
 $nu = time();
 $ip = (string)($_SERVER['REMOTE_ADDR'] ?? 'okand');
-if (!review_rate_ok($RATE_DIR, 'ip:' . $ip, $RATE_IP_MAX, $RATE_IP_WINDOW, $nu)
+if (!review_rate_ok($RATE_DIR, 'ip:' . review_rate_ip($ip), $RATE_IP_MAX, $RATE_IP_WINDOW, $nu)
     || !review_rate_ok($RATE_DIR, 'alla', $RATE_ALL_MAX, $RATE_ALL_WINDOW, $nu)) {
     tillbaka('fel=mangd');
 }
