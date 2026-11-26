@@ -65,5 +65,41 @@ $r = review_process(['namn' => "Hacker\r\nBcc: ond@evil.com", 'betyg' => '5', 'r
 $m = $r['mail'];
 check('ämnesraden saknar radbrytningar', $m && !preg_match('/[\r\n]/', $m['subject']));
 
+// Längdgränser på servern (webbläsarens maxlength går att kringgå)
+$r = review_process(['namn' => 'Anna', 'betyg' => '5', 'recension' => str_repeat('å', 1501)], $TO, $FROM);
+check('för lång recension → fel validering', ($r['error'] ?? null) === 'validering');
+
+$r = review_process(['namn' => 'Anna', 'betyg' => '5', 'recension' => str_repeat('å', 1500)], $TO, $FROM);
+check('recension på exakt 1500 tecken (åäö) godkänns', isset($r['mail']));
+
+$r = review_process(['namn' => 'Anna', 'betyg' => '5', 'recension' => str_repeat("a\r\n", 750)], $TO, $FROM);
+check('radbrytningar (CRLF) räknas som ett tecken', isset($r['mail']));
+
+$r = review_process(['namn' => str_repeat('a', 81), 'betyg' => '5', 'recension' => 'Bra'], $TO, $FROM);
+check('för långt namn → fel validering', ($r['error'] ?? null) === 'validering');
+
+$r = review_process(['namn' => 'Anna', 'ort' => str_repeat('a', 81), 'betyg' => '5', 'recension' => 'Bra'], $TO, $FROM);
+check('för lång ort → fel validering', ($r['error'] ?? null) === 'validering');
+
+$r = review_process(['namn' => 'Anna', 'betyg' => '5', 'recension' => 'Bra', 'epost' => str_repeat('a', 60) . '@' . str_repeat('b', 60) . '.se'], $TO, $FROM);
+check('för lång e-post → fel epost', ($r['error'] ?? null) === 'epost');
+
+$r = review_process(['namn' => ['x'], 'betyg' => '5', 'recension' => 'Bra'], $TO, $FROM);
+check('fält skickat som array → fel validering', ($r['error'] ?? null) === 'validering');
+
+// Spärr mot massutskick
+$dir = sys_get_temp_dir() . '/jockes-rate-test-' . bin2hex(random_bytes(4));
+$t = 1000000;
+check('spärr: 1:a inskicket släpps igenom', review_rate_ok($dir, 'ip:1.2.3.4', 3, 600, $t));
+check('spärr: 2:a inskicket släpps igenom', review_rate_ok($dir, 'ip:1.2.3.4', 3, 600, $t + 1));
+check('spärr: 3:e inskicket släpps igenom', review_rate_ok($dir, 'ip:1.2.3.4', 3, 600, $t + 2));
+check('spärr: 4:e inskicket inom fönstret stoppas', !review_rate_ok($dir, 'ip:1.2.3.4', 3, 600, $t + 3));
+check('spärr: annan nyckel påverkas inte', review_rate_ok($dir, 'ip:5.6.7.8', 3, 600, $t + 3));
+check('spärr: släpper igenom igen när fönstret passerat', review_rate_ok($dir, 'ip:1.2.3.4', 3, 600, $t + 700));
+check('spärr: filnamn avslöjar inte IP-adressen', !glob($dir . '/*1.2.3.4*'));
+check('spärr: oskrivbar katalog stoppar inte formuläret', review_rate_ok('/proc/finns-inte/x', 'ip:1.2.3.4', 3, 600, $t));
+array_map('unlink', glob($dir . '/*') ?: []);
+@rmdir($dir);
+
 echo "\n$pass godkända, $fail underkända\n";
 exit($fail === 0 ? 0 : 1);

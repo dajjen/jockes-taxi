@@ -38,9 +38,10 @@
   if (status) {
     var params = new URLSearchParams(window.location.search);
     var fel = {
-      validering: "Fyll i namn, betyg och recensionstext så skickar vi den.",
+      validering: "Fyll i namn, betyg och recensionstext (högst 1 500 tecken) så skickar vi den.",
       epost: "E-postadressen ser inte giltig ut — kontrollera den eller lämna fältet tomt.",
       skick: "Något gick fel när recensionen skulle skickas. Försök gärna igen om en stund.",
+      mangd: "Vi har fått många recensioner på kort tid. Försök gärna igen lite senare.",
       metod: "Något gick fel. Försök igen."
     };
 

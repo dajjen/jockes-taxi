@@ -3,8 +3,32 @@ declare(strict_types=1);
 
 /**
  * review-lib.php — ren, testbar logik för recensionsformuläret.
- * Ingen I/O här (ingen mail(), header() eller $_POST) så den kan enhetstestas.
+ * Ingen mail(), header() eller $_POST här, så allt kan enhetstestas.
+ * (review_rate_ok() skriver små räknarfiler i den katalog den får som argument.)
  */
+
+/** Längdgränser — samma som maxlength i formuläret, men kontrollerade på servern. */
+const REVIEW_MAX_NAMN      = 80;
+const REVIEW_MAX_ORT       = 80;
+const REVIEW_MAX_EPOST     = 120;
+const REVIEW_MAX_RECENSION = 1500;
+
+/** Läser ett formulärfält som text. Fält skickade som array (namn[]=x) blir tomma. */
+function review_falt(array $post, string $namn): string
+{
+    $v = $post[$namn] ?? '';
+    if (!is_scalar($v)) {
+        return '';
+    }
+    // Webbläsare skickar radbrytningar som CRLF; räkna och lagra dem som ett tecken.
+    return trim(str_replace(["\r\n", "\r"], "\n", (string)$v));
+}
+
+/** Antal tecken (inte byte), så att åäö räknas som ett tecken var. */
+function review_langd(string $s): int
+{
+    return function_exists('mb_strlen') ? mb_strlen($s, 'UTF-8') : strlen($s);
+}
 
 /**
  * Behandlar inskickad formulärdata.
@@ -14,26 +38,31 @@ declare(strict_types=1);
  * @param string $from  Avsändaradress (måste vara egen domän).
  * @return array Ett av:
  *   ['spam' => true]                          — honungsfällan utlöst
- *   ['error' => 'validering'|'epost']         — ogiltig indata
+ *   ['error' => 'validering'|'epost']         — ogiltig eller för lång indata
  *   ['mail' => ['to','subject','body','headers']] — redo att skickas
  */
 function review_process(array $post, string $to, string $from): array
 {
     // Honungsfälla: dolt fält ifyllt = bot.
-    if (trim((string)($post['webbplats'] ?? '')) !== '') {
+    if (review_falt($post, 'webbplats') !== '') {
         return ['spam' => true];
     }
 
-    $namn      = trim((string)($post['namn'] ?? ''));
-    $ort       = trim((string)($post['ort'] ?? ''));
-    $epost     = trim((string)($post['epost'] ?? ''));
-    $betyg     = (int)($post['betyg'] ?? 0);
-    $recension = trim((string)($post['recension'] ?? ''));
+    $namn      = review_falt($post, 'namn');
+    $ort       = review_falt($post, 'ort');
+    $epost     = review_falt($post, 'epost');
+    $betyg     = (int)review_falt($post, 'betyg');
+    $recension = review_falt($post, 'recension');
 
     if ($namn === '' || $recension === '' || $betyg < 1 || $betyg > 5) {
         return ['error' => 'validering'];
     }
-    if ($epost !== '' && !filter_var($epost, FILTER_VALIDATE_EMAIL)) {
+    if (review_langd($namn) > REVIEW_MAX_NAMN
+        || review_langd($ort) > REVIEW_MAX_ORT
+        || review_langd($recension) > REVIEW_MAX_RECENSION) {
+        return ['error' => 'validering'];
+    }
+    if ($epost !== '' && (review_langd($epost) > REVIEW_MAX_EPOST || !filter_var($epost, FILTER_VALIDATE_EMAIL))) {
         return ['error' => 'epost'];
     }
 
@@ -67,4 +96,59 @@ function review_process(array $post, string $to, string $from): array
     }
 
     return ['mail' => ['to' => $to, 'subject' => $amne, 'body' => $body, 'headers' => $headers]];
+}
+
+/**
+ * Spärr mot massutskick: högst $max inskick per $nyckel under $fonster sekunder.
+ *
+ * Varje nyckel får en liten fil i $katalog med tidsstämplar. Filnamnet är en hash,
+ * så IP-adresser sparas inte i klartext. Går katalogen inte att skriva i släpps
+ * inskicket igenom — hellre ett formulär utan spärr än ett som inte fungerar.
+ *
+ * @return bool true = släpp igenom (och räkna inskicket), false = för många.
+ */
+function review_rate_ok(string $katalog, string $nyckel, int $max, int $fonster, int $nu): bool
+{
+    if (!is_dir($katalog) && !@mkdir($katalog, 0700, true) && !is_dir($katalog)) {
+        return true;
+    }
+    $fh = @fopen($katalog . '/' . hash('sha256', $nyckel) . '.txt', 'c+');
+    if ($fh === false) {
+        return true;
+    }
+    if (!flock($fh, LOCK_EX)) {
+        fclose($fh);
+        return true;
+    }
+
+    $tider = [];
+    foreach (explode("\n", (string)stream_get_contents($fh)) as $rad) {
+        $t = (int)$rad;
+        if ($t > $nu - $fonster && $t <= $nu) {
+            $tider[] = $t;
+        }
+    }
+
+    $ok = count($tider) < $max;
+    if ($ok) {
+        $tider[] = $nu;
+    }
+    ftruncate($fh, 0);
+    rewind($fh);
+    fwrite($fh, implode("\n", $tider));
+    fflush($fh);
+    flock($fh, LOCK_UN);
+    fclose($fh);
+
+    return $ok;
+}
+
+/** Tar bort räknarfiler som inte rörts på $aldre sekunder, så katalogen inte växer. */
+function review_rate_stada(string $katalog, int $aldre, int $nu): void
+{
+    foreach (glob($katalog . '/*.txt') ?: [] as $fil) {
+        if ((int)@filemtime($fil) < $nu - $aldre) {
+            @unlink($fil);
+        }
+    }
 }

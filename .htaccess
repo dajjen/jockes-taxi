@@ -57,6 +57,9 @@ ErrorDocument 404 /404.html
 # ---- Arbetsfiler som inte ska vara nåbara publikt ----------------------------
 <IfModule mod_alias.c>
   RedirectMatch 404 ^/(_[^/]*|Untitled|components/logo/logo\.html|review-lib\.php)$
+  # Deploy-skript, dokumentation och projektfiler — ska aldrig serveras, även om
+  # de råkar hamna på servern (deployen raderar inte gamla filer).
+  RedirectMatch 404 ^/([^/]+\.(sh|md|yml|yaml|lock|log)|package(-lock)?\.json|(docs|test|node_modules)(/.*)?)$
 </IfModule>
 
 # ---- Säkerhets-headers -------------------------------------------------------
@@ -66,6 +69,11 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # Content-Security-Policy: bara egna filer får laddas och köras. Inga inline-skript
+  # (JSON-LD är data och påverkas inte). 'unsafe-inline' gäller enbart stilar, för
+  # <style>-blocket i 404.html. Lägger du till en extern tjänst (karta, statistik,
+  # typsnitt) måste dess domän läggas till här, annars blockeras den.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
 </IfModule>
 
 # ---- Teckenkodning -----------------------------------------------------------
