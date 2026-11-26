@@ -424,6 +424,8 @@ img, svg { max-width: 100%; display: block; }
   gap: 16px;
   margin-top: 8px;
 }
+/* Ett ensamt omdöme får inte krympa till en tredjedels bredd på desktop. */
+.review-card:only-child { grid-column: 1 / -1; max-width: 620px; }
 .review-card {
   background: var(--ground);
   border: 1px solid var(--line);
