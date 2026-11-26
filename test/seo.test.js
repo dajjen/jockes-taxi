@@ -95,3 +95,14 @@ test("alla bilder/svg med role=img eller img-tagg har alt eller aria", () => {
     assert.ok(hasAlt, `<img> saknar alt: ${img.toString().slice(0, 60)}`);
   }
 });
+
+test("JSON-LD har ett WebSite-schema så Google visar 'Jockes Taxi' som sajtnamn", () => {
+  const scripts = doc.querySelectorAll('script[type="application/ld+json"]');
+  const all = scripts.flatMap((s) => [].concat(JSON.parse(s.text)));
+  const site = all.find((d) => [].concat(d["@type"]).includes("WebSite"));
+  assert.ok(site, "saknar JSON-LD med @type WebSite");
+  assert.equal(site.name, "Jockes Taxi");
+  assert.equal(site.url, "https://www.jockestaxi.se/");
+  assert.ok([].concat(site.alternateName ?? []).includes("jockestaxi.se"),
+    "WebSite.alternateName bör innehålla jockestaxi.se");
+});
