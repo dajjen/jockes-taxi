@@ -8,6 +8,9 @@
     yr.textContent = String(new Date().getFullYear());
   }
 
+  // Engelska sidan (/en/) har lang="en" — då ska även knapptexterna vara på engelska.
+  var en = document.documentElement.lang === "en";
+
   // Mobilmeny: hamburgar-knappen fäller ut/in navigeringen.
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("huvudmeny");
@@ -15,7 +18,7 @@
     var setOpen = function (open) {
       nav.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Stäng meny" : "Öppna meny");
+      toggle.setAttribute("aria-label", open ? (en ? "Close menu" : "Stäng meny") : (en ? "Open menu" : "Öppna meny"));
     };
     toggle.addEventListener("click", function () {
       setOpen(!nav.classList.contains("is-open"));

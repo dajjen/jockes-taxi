@@ -651,14 +651,15 @@ img, svg { max-width: 100%; display: block; }
     display: flex;
     position: static;
     flex-direction: row;
-    gap: 26px;
+    gap: 14px;
     background: none;
     border-bottom: none;
     box-shadow: none;
     padding: 0;
   }
   .nav a {
-    font-size: 0.96rem;
+    font-size: 0.86rem;
+    white-space: nowrap; /* fem menyval + ring-knapp ska rymmas på en rad */
     padding: 6px 0;
     border-bottom: 2px solid transparent;
   }
@@ -677,6 +678,8 @@ img, svg { max-width: 100%; display: block; }
 }
 
 @media (min-width: 1024px) {
+  .nav { gap: 26px; }
+  .nav a { font-size: 0.96rem; }
   .areas, .reviews { padding-block: 88px; }
   .contact { padding-block: 92px; }
 }
