@@ -393,6 +393,13 @@ img, svg { max-width: 100%; display: block; }
   color: var(--muted);
 }
 .area-foot strong { color: var(--sea); }
+.area-links { margin-top: 10px; color: var(--muted); }
+.area-links a, .landing a { color: var(--sea); font-weight: 600; }
+
+/* ---------- Ortssidor (/taxi-faro/, /taxi-visby/) ---------- */
+.landing-inner { max-width: 760px; }
+.landing p { color: var(--muted); font-size: 1.05rem; margin-bottom: 16px; }
+.landing .landing-more { margin-bottom: 0; }
 
 /* ---------- Omdömen ---------- */
 .reviews {
