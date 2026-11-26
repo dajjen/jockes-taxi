@@ -146,6 +146,17 @@ img, svg { max-width: 100%; display: block; }
   background: rgba(241, 236, 225, 0.08);
 }
 
+/* Sekundär knapp på ljus bakgrund */
+.btn-outline {
+  background: transparent;
+  color: var(--sea);
+  border-color: var(--sea);
+}
+.btn-outline:hover {
+  background: var(--sea);
+  color: var(--ground);
+}
+
 .btn-lg { padding: 16px 28px; font-size: 1.06rem; }
 .btn-block { width: 100%; }
 .btn-call-ico { font-size: 1.05em; }
@@ -393,8 +404,8 @@ img, svg { max-width: 100%; display: block; }
   color: var(--muted);
 }
 .area-foot strong { color: var(--sea); }
-.area-links { margin-top: 10px; color: var(--muted); }
-.area-links a, .landing a { color: var(--sea); font-weight: 600; }
+.area-links { margin: -6px 0 26px; display: flex; flex-wrap: wrap; gap: 12px; }
+.landing a { color: var(--sea); font-weight: 600; }
 
 /* ---------- Ortssidor (/taxi-faro/, /taxi-visby/) ---------- */
 .landing-inner { max-width: 760px; }
